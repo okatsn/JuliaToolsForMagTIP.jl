@@ -30,7 +30,7 @@ function toordinal(v...)
 end
 
 """
-`chkdatetime(v...)` use `try ... catch ...` to check if a vector `[yyyy, mm, dd, hh, MM, ss]` is a valid datetime. 
+`chkdatetime(v...)` use `try ... catch ...` to check if a vector `[yyyy, mm, dd, hh, MM, ss]` is a valid datetime. It returns `false` if it is not an legal date vector array. 
 """
 function chkdatetime(v...)
     dtisvalid = true

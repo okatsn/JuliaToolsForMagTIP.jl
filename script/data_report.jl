@@ -84,7 +84,7 @@ for df_i in gd_stn
             dfm = DataFrame(M[:,1:7], 
                     [:year, :month,:day,:hour,:minute,:second,:data])
             
-            filter!(AsTable(:) => (nt -> chkdatetime(nt.year, nt.month, nt.day, nt.minute, nt.second)) , dfm)
+            filter!(AsTable(:) => (nt -> isgeomagdatavalid(nt)) , dfm)
 
             select!(dfm, 
             [:year, :month,:day,:hour,:minute,:second] => ByRow((yyyy,mm,dd,hh,MM,ss) -> toordinal(yyyy,mm,dd,hh,MM,ss)) => :ordinaldate, :data)

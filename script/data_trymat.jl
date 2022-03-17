@@ -81,7 +81,7 @@ for df_i in gd_stn
 
             
         end
-        write(target, "M", Matrix(dfm2))
+        write(target, "M", Matrix(df000))
         close(target)
     catch e
         rm(fpath);
