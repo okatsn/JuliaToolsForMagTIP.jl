@@ -7,5 +7,8 @@ using Dates
 include("datenum.jl")
 export datenum, toordinal, chkdatetime
 
+include("isgeomagdatavalid.jl")
+export isgeomagdatavalid
+
 end
 
