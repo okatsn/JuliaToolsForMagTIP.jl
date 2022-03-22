@@ -47,17 +47,19 @@ gd_stnmon = groupby(df2, [:station, :month])
 daycount_inmonth_stn = combine(gd_stnmon, nrow => :counts)
 
 rt0t1 = floor.(extrema(fulldt), Dates.Month)
-xticks = Guide.xticks(ticks=rt0t1[1]:Dates.Month(1):rt0t1[2])
+
 mycs = ColorScheme(range(colorant"white", stop=colorant"lightgreen", length=100)) # range(HSV(0,1,1), stop=HSV(250,1,1), length=100)
 # platettef = Scale.lab_gradient(...)
 
-set_default_plot_size(6inch,2.5inch)
+set_default_plot_size(9inch,2.5inch)
 p = plot(daycount_inmonth_stn, x=:month, y=:station, color=:counts, 
 Geom.rectbin, 
-Coord.cartesian(xmin=rt0t1[1], xmax=rt0t1[2]), 
+# Coord.cartesian(xmin=rt0t1[1], xmax=rt0t1[2]), # this makes xtick label protrude
+Guide.xticks(ticks=DateTime.(collect(rt0t1[1]:Dates.Month(3):rt0t1[2]))), 
+# Scale.x_continuous(;minticks=10, maxticks=50), 
 Scale.color_continuous(colormap=p->get(mycs, p),minvalue=0, maxvalue=30),
-Guide.xticks(orientation=:horizontal)
 )
+# A vector of `Date` needs to be converted to `DateTime` to avoid a conversion error (trying to get the `hour` in Showoff.jl).
 
 # df2 |> 
 # @vlplot(
